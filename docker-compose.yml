@@ -1,0 +1,36 @@
+version: '3'
+services:
+  banking:
+    build: ./banking
+    container_name: backend
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    environment:
+      DB_NAME: ${DB_NAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_URL: ${POSTGRES_URL}
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      SERVER_PORT: ${SERVER_PORT}
+      SERVLET_CONTEXT_PATH: ${SERVLET_CONTEXT_PATH}
+      JPA_TIMEZONE: ${JPA_TIMEZONE}
+      SHOW_SQL: ${SHOW_SQL}
+    networks:
+      - spring-postgres
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    container_name: postgresql
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    networks:
+      - spring-postgres
+networks:
+  spring-postgres:

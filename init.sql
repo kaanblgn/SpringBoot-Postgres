@@ -1,0 +1,2 @@
+CREATE DATABASE banking;
+GRANT ALL PRIVILEGES ON DATABASE banking TO postgres;
