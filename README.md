@@ -34,27 +34,27 @@ Projeyi çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
 Proje aşağıdaki teknolojileri ve bağımlılıkları kullanmaktadır:
 
-- **Java 17**: Uygulamanın geliştirilmesinde kullanılan programlama dili.
-- **Spring Boot 3.1.3**: Uygulama geliştirmek için kullanılan Spring Boot sürümü.
-- **Spring Boot Starter Data JPA**: Veritabanı işlemleri için Spring Boot kütüphanesi.
-- **Spring Boot Starter Web**: Web uygulama geliştirmek için Spring Boot kütüphanesi.
-- **PostgreSQL**: Veritabanı olarak kullanılan PostgreSQL.
-- **Hibernate 6.2.5.Final**: JPA (Java Persistence API) için kullanılan Hibernate ORM sürümü.
-- **Lombok**: Java sınıflarını daha basit hale getirmek ve boilerplate kodları azaltmak için kullanılan bir kütüphane.
-- **Flyway Core**: Veritabanı şema versiyon kontrolü ve veritabanı migrasyonu için kullanılan araç.
-- **Spring Boot Starter Test**: Testler için Spring Boot kütüphanesi.
-- **Spring Boot Starter Validation**: Validation işlemleri için Spring Boot kütüphanesi.
-- **JUnit**: Java uygulamalarını test etmek için kullanılan bir test çerçevesi.
-- **Spring Boot Starter Log4j2**: Loglama için Spring Boot ve Log4j2 kütüphaneleri.
-- **Slf4j**: Loglama için kullanılan bir arayüz.
+- **Java 17**
+- **Spring Boot 3.1.3**
+- **Spring Boot Starter Data JPA**
+- **Spring Boot Starter Web**
+- **PostgreSQL 13**
+- **Hibernate 6.2.5.Final**
+- **Lombok**
+- **Flyway Core**
+- **Spring Boot Starter Test**
+- **Spring Boot Starter Validation**
+- **JUnit**
+- **Spring Boot Starter Log4j2**
+- **Slf4j**
 
 **Katmanlı Mimari:**
 
 Proje, N katmanlı bir mimari yapısını benimsemektedir. Bu katmanlar, uygulamanın işleyişini düzenler ve sorumlulukları farklılaştırır. 
 
-1. **Controller Katmanı:** Bu katman, HTTP isteklerini dinler ve gelen istekleri işlemek için ilgili iş katmanına yönlendirir. Rest API'leri tanımlar ve kullanıcıların uygulama ile iletişim kurmasını sağlar.
+1. **Controller Katmanı:** HTTP isteklerini dinler ve gelen istekleri işlemek için ilgili iş katmanına yönlendirir. Rest API'leri tanımlar ve kullanıcıların uygulama ile iletişim kurmasını sağlar.
 
-2. **Business (İş) Katmanı:** İş katmanı, uygulamanın iş mantığını uygular. CRUD işlemleri gibi temel işlemleri gerçekleştirir ve iş kurallarını uygular. Ayrıca veri doğrulama ve iş mantığı kurallarının yer aldığı katmandır.
+2. **Business (İş) Katmanı:** Veri doğrulama ve iş mantığı kurallarının yer aldığı katmandır.
 
 3. **Repository (Veritabanı Erişim) Katmanı:** Bu katman, veritabanı ile iletişim kurar. Veri tabanına erişim, sorguların oluşturulması ve veritabanı işlemlerinin gerçekleştirilmesi bu katmanın sorumluluğundadır.
 
@@ -66,7 +66,7 @@ Proje, veri tabanı işlemleri için PostgreSQL veritabanını kullanmaktadır. 
 
 - **V2__create_tables.sql:** "bank," "users,", "account" ve "transactions" entity'lerine ait tabloların yaratılması.
 
-- **V3__populate_data:** Tüm dört tablo için örnek veri.
+- **V3__populate_data:** Tüm dört tablo için örnek veri üretimi.
 
 **Unique Constraintler:**
 
@@ -116,10 +116,13 @@ bidirectional ilişkiler kullanılmıştır. n+1 sorunundan kaçınmak için Fet
 
 Silme işlemleri, "fintech" (finans teknolojileri) projesinin gereksinimlerine göre dikkatli bir şekilde ele alınmıştır. Bu nedenle, cascade özellikleri belirli bir işlem tipine izin vermemektedir. Özellikle, veritabanındaki verilerin silinmesini kontrol etmek için cascade özellikleri verilmemiştir.
 
-Ancak, örnek bir silme işlemi göstermek için "User" (Kullanıcı) -> "Account" (Hesap) -> "Transaction" (İşlem) sıralamasını takip eden bir silme işlemi için bir endpoint mevcuttur. Bu, projenin gereksinimlerine uygun şekilde özelleştirilebilir ve yönetilebilir.
+Ancak, örnek bir silme işlemi göstermek için **User -> Account -> Transaction** sıralamasını takip eden bir silme işlemi için bir endpoint mevcuttur. Bu, projenin gereksinimlerine uygun şekilde özelleştirilebilir ve yönetilebilir.
 
 Bu yaklaşım, veri bütünlüğünü koruma ve iş mantığına daha fazla esneklik sağlama amacı gütmektedir.
 
+**Pessimistic Lock (Pesimistik Kilitleme):**
+
+Para yatırma (Deposit) ve para çekme (Withdraw) işlemleri için pesimistik kilitleme yöntemi kullanılması uygun görülmüştür. Bu yöntem, JPA repository içinde özel sorgular (custom query) kullanılarak `@Lock(LockModeType.PESSIMISTIC_WRITE)` ile gerçekleştirilmiştir. Bu sayede aynı kaynağa eş zamanlı erişimde sorunlar önlenmektedir.
 
 **DTO ve Entity Dönüşümleri:**
 
@@ -128,10 +131,6 @@ Proje içinde, DTO ve Entity sınıfları arasında dönüşümleri kolaylaştı
 **Exception Handling (Hata Yakalama):**
 
 `CrudException` adlı bir exception sınıfı bulunmaktadır. Bu sınıf, CRUD işlemleri sırasında ortak bir hata yapısını kullanarak boilerplate kod miktarını azaltmak için oluşturulmuştur. Özellikle özelleştirilmiş hata mesajları ve dönüş tipleri üzerinde geliştirme yapılması planlanmaktadır. Bu exceptionlar, `@RestControllerAdvice` ile işlenmektedir.
-
-**Pessimistic Lock (Pesimistik Kilitleme):**
-
-Para yatırma (Deposit) ve para çekme (Withdraw) işlemleri için pesimistik kilitleme yöntemi kullanılması uygun görülmüştür. Bu yöntem, JPA repository içinde özel sorgular (custom query) kullanılarak `@Lock(LockModeType.PESSIMISTIC_WRITE)` ile gerçekleştirilmiştir. Bu sayede aynı kaynağa eş zamanlı erişimde sorunlar önlenmektedir.
 
 **Enum Alanları Kontrol Etme (Validation):**
 
