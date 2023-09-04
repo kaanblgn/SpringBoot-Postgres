@@ -94,19 +94,19 @@ Proje, veri tabanı işlemleri için PostgreSQL veritabanını kullanmaktadır. 
 
 ### User
 
-- İlişkiler: Birden fazla account'a sahip olabilir (one-to-many).
+- Birden fazla account'a sahip olabilir (one-to-many).
 
 ### Bank
 
-- İlişkiler: Birden fazla account'a sahip olabilir.
+- Birden fazla account'a sahip olabilir.
 
 ### Account
 
-- İlişkiler: Bir user'a ve bir bank'e aittir (many-to-one), birden fazla transaction içerebilir (one-to-many)
+- Bir user'a ve bir bank'e aittir (many-to-one), birden fazla transaction içerebilir (one-to-many)
 
 ### Transaction
 
-- İlişkiler: Bir account'a aittir.
+- Bir account'a aittir.
 
 ## İlişkiler ve FetchType Kullanımı
 
