@@ -1,0 +1,794 @@
+{
+	"info": {
+		"_postman_id": "9f30d99f-498f-41b5-93bc-000f7763a1be",
+		"name": "BankingApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19787471"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// parse response json\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"//set created Id to global env variable\r",
+									"pm.globals.set(\"created_user_id\", responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kaan Bil\",\r\n    \"email\": \"john@bing.com\",\r\n    \"password\": \"mysecretpassword\",\r\n    \"phoneNumber\": \"5553594567\",\r\n    \"address\": \"123 Main St\",\r\n    \"identityType\": \"VKN\",\r\n    \"identityNo\": \"12534678901\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_user_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated Name\",\r\n    \"email\": \"updated_email@example.com\",\r\n    \"password\": \"newsecretpassword\",\r\n    \"phoneNumber\": \"5811234567\",\r\n    \"address\": \"456 Elm St\",\r\n    \"identityType\": \"TCKN\",\r\n    \"identityNo\": \"9876543210\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_user_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b6189152-b981-4a6f-a7dd-0c180657a62e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Bank",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// parse response json\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"//set created Id to global env variable\r",
+									"pm.globals.set(\"created_bank_id\", responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Qb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/banks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"banks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/banks/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"banks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_bank_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/banks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"banks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated Name\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/banks/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"banks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_bank_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/banks/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"banks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_bank_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/transactions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c77fb11c-32fb-46c9-88c5-43eea9b7b80b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/transactions/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c77fb11c-32fb-46c9-88c5-43eea9b7b80b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// parse response json\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"//set created Id to global env variable\r",
+									"pm.globals.set(\"created_account_id\", responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"b6189152-b981-4a6f-a7dd-0c180657a62e\",\r\n    \"bankId\": \"6e6144e5-16f3-4164-a8e9-1fd5c6dd11f4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_account_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts/:id/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts",
+								":id",
+								"balance"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_account_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts/:id/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts",
+								":id",
+								"transactions"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_account_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\":\"DEPOSIT\",\r\n    \"amount\":\"260.00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts/:id/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts",
+								":id",
+								"deposit"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_account_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\":\"WITHDRAW\",\r\n    \"amount\":\"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts/:id/withdraw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts",
+								":id",
+								"withdraw"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_account_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8900/banking-service/api/v1/accounts/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8900",
+							"path": [
+								"banking-service",
+								"api",
+								"v1",
+								"accounts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{created_account_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
