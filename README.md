@@ -152,3 +152,5 @@ Request DTO'lar içinde bulunan enum alanlarının doğrulanması için özel An
 
 7. **Test Artırımı:** Testlerin sayısı artırılacak ve test kapsamı genişletilecektir. Projedeki test coverage yükseltilecektir.
 
+8. **Swagger:** Endpointlerinin dokümantasyonu için en kısa sürede eklenecetir.
+
